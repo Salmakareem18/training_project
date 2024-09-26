@@ -63,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Center(
                             child: Text(
                           person.name ?? 'Unknown',
+                          style: const TextStyle(fontSize: 20),
                         )),
                       ),
                     ),
