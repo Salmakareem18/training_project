@@ -42,8 +42,7 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
             } else if (!snapshot.hasData) {
               return const Center(child: Text('No persons found'));
             }
-            // ignore: non_constant_identifier_names
-            var InfoPersonModel = snapshot.data!;
+            var infoPersonModel = snapshot.data!;
             return Padding(
               padding: const EdgeInsets.all(20.0),
               child: SingleChildScrollView(
@@ -58,12 +57,12 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                               MaterialPageRoute(
                                 builder: (context) => FullImageScreen(
                                     imageUrl:
-                                        'https://image.tmdb.org/t/p/w500${InfoPersonModel.profilePath}'),
+                                        'https://image.tmdb.org/t/p/w500${infoPersonModel.profilePath}'),
                               ),
                             );
                           },
                           child: Image.network(
-                            'https://image.tmdb.org/t/p/w500${InfoPersonModel.profilePath}',
+                            'https://image.tmdb.org/t/p/w500${infoPersonModel.profilePath}',
                             height: 300,
                             width: 200,
                             fit: BoxFit.cover,
@@ -74,7 +73,7 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                         height: 20,
                       ),
                       Text(
-                        InfoPersonModel.name ?? 'no name',
+                        infoPersonModel.name ?? 'no name',
                         style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
@@ -89,7 +88,7 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                                 fontWeight: FontWeight.bold, fontSize: 20),
                           ),
                           Text(
-                            ' ${InfoPersonModel.birthday?.split('1980-6-21')}',
+                            ' ${infoPersonModel.birthday?.split('1980-6-21')}',
                             style: const TextStyle(fontSize: 20),
                           ),
                         ],
@@ -97,7 +96,7 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                      if (InfoPersonModel.biography != null)
+                      if (infoPersonModel.biography != null)
                         const Text(
                           'Biography:',
                           style: TextStyle(
@@ -107,7 +106,7 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                         height: 10,
                       ),
                       Text(
-                        ' ${InfoPersonModel.biography ?? 'NO Biography'}',
+                        ' ${infoPersonModel.biography ?? 'NO Biography'}',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ]),
