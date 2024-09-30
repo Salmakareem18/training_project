@@ -18,7 +18,7 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
   @override
   void initState() {
     GetPersonCubit.get(context).getInfoperson(personId: widget.personId);
-    GetPersonCubit.get(context).getImagesperson(personId: widget.personId);
+    // GetPersonCubit.get(context).getImagesperson(personId: widget.personId);
     super.initState();
   }
 
@@ -31,8 +31,6 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
       ),
       body: FutureBuilder(
           future: ApiGetPersons.infoperson(personId: widget.personId),
-          // ApiGetPersons.imagesperson(personId: widget.personId),
-
           builder: (context, snapshot) {
             if (snapshot.data == null) {
               return const Center(child: CircularProgressIndicator());
@@ -45,7 +43,6 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
               return const Center(child: Text('No persons found'));
             }
             var infoPersonModel = snapshot.data!;
-            // var imagesPersonModel = snapshot.data![1];
             return Padding(
               padding: const EdgeInsets.all(20.0),
               child: SingleChildScrollView(
@@ -105,10 +102,10 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                               return const Center(
                                   child: Text('No images available.'));
                             } else {
-                              var imagespersonmodel = snapshot.data!;
+                              var imagesPersonModel = snapshot.data!;
                               return ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: imagespersonmodel.profiles?.length,
+                                itemCount: imagesPersonModel.profiles?.length,
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
@@ -117,7 +114,7 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                                         MaterialPageRoute(
                                           builder: (context) => FullImageScreen(
                                             imageUrl:
-                                                'https://image.tmdb.org/t/p/w500${imagespersonmodel.profiles?[index].filePath ?? 'https://image.tmdb.org/t/p/w500${infoPersonModel.profilePath}'}',
+                                                'https://image.tmdb.org/t/p/w500${imagesPersonModel.profiles![index].filePath!}',
                                           ),
                                         ),
                                       );
@@ -126,7 +123,7 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                                       padding:
                                           const EdgeInsets.only(right: 8.0),
                                       child: Image.network(
-                                        'https://image.tmdb.org/t/p/w500${imagespersonmodel.profiles?[index].filePath ?? 'https://image.tmdb.org/t/p/w500${infoPersonModel.profilePath}'}',
+                                        'https://image.tmdb.org/t/p/w500${imagesPersonModel.profiles?[index].filePath ?? 'https://image.tmdb.org/t/p/w500${infoPersonModel.profilePath}'}',
                                         fit: BoxFit.cover,
                                       ),
                                     ),

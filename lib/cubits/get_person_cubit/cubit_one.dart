@@ -23,13 +23,13 @@ class GetPersonCubit extends Cubit<PersonState> {
     }
   }
 
-  getImagesperson({required int personId}) async {
-    try {
-      emit(ImagesLoading());
-      final images = await ApiGetPersons.getimagesperson(personId: personId);
-      emit(ImagesLoadedState(imagesperson: images.profiles!));
-    } catch (e) {
-      emit(ImagesfailureState(errormessage: ' try again: $e'));
-    }
-  }
+  // getImagesperson({required int personId}) async {
+  //   try {
+  //     emit(ImagesLoading());
+  //     final images = await ApiGetPersons.getimagesperson(personId: personId);
+  //     emit(ImagesLoadedState());
+  //   } catch (e) {
+  //     emit(ImagesfailureState(errormessage: ' try again: $e'));
+  //   }
+  // }
 }
