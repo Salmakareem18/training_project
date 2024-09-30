@@ -123,7 +123,7 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 8.0),
                                 child: Image.network(
-                                  'https://image.tmdb.org/t/p/w500${imagespersonmodel.profiles![index].filePath ?? 'https://image.tmdb.org/t/p/w500${infoPersonModel.profilePath}'}',
+                                  'https://image.tmdb.org/t/p/w500${imagespersonmodel.profiles?[index].filePath ?? 'https://image.tmdb.org/t/p/w500${infoPersonModel.profilePath}'}',
                                   fit: BoxFit.cover,
                                 ),
                               ),
