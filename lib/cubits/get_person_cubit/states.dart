@@ -20,7 +20,10 @@ class PersonfailureState extends PersonState {
 
 class ImagesLoading extends PersonState {}
 
-class ImagesLoadedState extends PersonState {}
+class ImagesLoadedState extends PersonState {
+  final List<Profiles> imagesperson;
+  ImagesLoadedState({required this.imagesperson});
+}
 
 class ImagesfailureState extends PersonState {
   final String errormessage;

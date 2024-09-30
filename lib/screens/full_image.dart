@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class FullImageScreen extends StatelessWidget {
   final String imageUrl;

@@ -9,7 +9,7 @@ class GetPersonCubit extends Cubit<PersonState> {
   GetPersonCubit() : super(PersonInitial());
   static GetPersonCubit get(context) => BlocProvider.of(context);
   InfoPersonModel infoPersonModel = InfoPersonModel();
-  ImagesModel imagesModel = ImagesModel();
+  ImagesPersonModel imagesPersonModel = ImagesPersonModel();
   getInfoperson({required int personId}) async {
     try {
       emit(PersonLoading());
@@ -26,8 +26,8 @@ class GetPersonCubit extends Cubit<PersonState> {
   getImagesperson({required int personId}) async {
     try {
       emit(ImagesLoading());
-      final images = await ApiGetPersons.imagesperson(personId: personId);
-      emit(ImagesLoadedState());
+      final images = await ApiGetPersons.getimagesperson(personId: personId);
+      emit(ImagesLoadedState(imagesperson: images.profiles!));
     } catch (e) {
       emit(ImagesfailureState(errormessage: ' try again: $e'));
     }

@@ -1,10 +1,10 @@
-class ImagesModel {
+class ImagesPersonModel {
   int? id;
   List<Profiles>? profiles;
 
-  ImagesModel({this.id, this.profiles});
+  ImagesPersonModel({this.id, this.profiles});
 
-  ImagesModel.fromJson(Map<String, dynamic> json) {
+  ImagesPersonModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     if (json['profiles'] != null) {
       profiles = <Profiles>[];

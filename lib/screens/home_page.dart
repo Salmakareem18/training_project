@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:training_project/models/person_model.dart';
-
 import 'package:training_project/screens/person_details.dart';
 import 'package:training_project/servieces/api_get_persons.dart';
 
@@ -21,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 117, 96, 96),
           title: const Text('Famous Persons'),
-          centerTitle: true,
+          leading: const Icon(Icons.person),
         ),
         body: FutureBuilder<PopularModel>(
             future: apiGetPersons.famousPerson(),
@@ -62,11 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: 100,
                         height: 100,
                         child: Center(
-                          child: Text(
-                            person.name ?? 'Unknown',
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                        ),
+                            child: Text(
+                          person.name ?? 'Unknown',
+                          style: const TextStyle(fontSize: 20),
+                        )),
                       ),
                     ),
                   );
