@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
-import 'package:image_downloader/image_downloader.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class FullImageScreen extends StatelessWidget {
   final String imageUrl;
 
   const FullImageScreen({super.key, required this.imageUrl});
 
-  void imageDownloader(String url) {}
+  void imageGallerySaver(String url) {}
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class FullImageScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.download),
             onPressed: () {
-              imageDownloader(imageUrl);
+              imageGallerySaver(imageUrl);
             },
           ),
         ],

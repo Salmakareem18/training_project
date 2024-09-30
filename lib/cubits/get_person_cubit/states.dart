@@ -1,3 +1,5 @@
+import 'package:training_project/models/images_person_model.dart';
+
 class PersonState {}
 
 class PersonInitial extends PersonState {}
@@ -14,4 +16,14 @@ class PersonfailureState extends PersonState {
   final String errormessage;
 
   PersonfailureState({required this.errormessage});
+}
+
+class ImagesLoading extends PersonState {}
+
+class ImagesLoadedState extends PersonState {}
+
+class ImagesfailureState extends PersonState {
+  final String errormessage;
+
+  ImagesfailureState({required this.errormessage});
 }

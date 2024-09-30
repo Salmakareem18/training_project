@@ -38,7 +38,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   insta_image_viewer: ^1.0.4
   dio: ^5.7.0
-  image_downloader: ^0.31.0
+  image_gallery_saver: ^2.0.3
 
 dev_dependencies:
   flutter_test:

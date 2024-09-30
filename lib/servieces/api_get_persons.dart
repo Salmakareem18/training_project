@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:training_project/models/images_person_model.dart';
 import 'package:training_project/models/info_person_model.dart';
 import 'package:training_project/models/person_model.dart';
 
@@ -28,6 +29,21 @@ class ApiGetPersons {
 
       InfoPersonModel infoPersonModel = InfoPersonModel.fromJson(decoded);
       return infoPersonModel;
+    } else {
+      throw Exception(
+          'There is a problem with the status code: ${response.statusCode}');
+    }
+  }
+
+  static Future<ImagesModel> imagesperson({required int personId}) async {
+    http.Response response = await http.get(Uri.parse(
+        'https://api.themoviedb.org/3/person/$personId/images?api_key=2dfe23358236069710a379edd4c65a6b'));
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> decoded = json.decode(response.body);
+
+      ImagesModel imagesModel = ImagesModel.fromJson(decoded);
+      return ImagesModel();
     } else {
       throw Exception(
           'There is a problem with the status code: ${response.statusCode}');
