@@ -48,93 +48,97 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
             // var imagesPersonModel = snapshot.data![1];
             return Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Column(children: [
-                Text(
-                  infoPersonModel.name ?? 'no name',
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    const Text(
-                      'Birthday:',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    Text(
-                      ' ${infoPersonModel.birthday ?? '21-9-2000'}',
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    const Text(
-                      'Person Id:',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    Text(
-                      ' ${infoPersonModel.id ?? 'NO Id'}',
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                SizedBox(
-                  height: 200,
-                  child: FutureBuilder(
-                    future: ApiGetPersons.getimagesperson(
-                        personId: widget.personId),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(child: CircularProgressIndicator());
-                      } else if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
-                      } else if (!snapshot.hasData) {
-                        return const Center(
-                            child: Text('No images available.'));
-                      } else {
-                        var imagespersonmodel = snapshot.data!;
-                        return ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: imagespersonmodel.profiles?.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => FullImageScreen(
-                                      imageUrl:
-                                          'https://image.tmdb.org/t/p/w500${imagespersonmodel.profiles![index].filePath ?? 'https://image.tmdb.org/t/p/w500${infoPersonModel.profilePath}'}',
+              child: SingleChildScrollView(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        infoPersonModel.name ?? 'no name',
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          const Text(
+                            'Birthday:',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          Text(
+                            ' ${infoPersonModel.birthday ?? '21-9-2000'}',
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        'Biography:',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      Text(
+                        ' ${infoPersonModel.biography ?? 'No biography'}',
+                        style: const TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      SizedBox(
+                        height: 200,
+                        child: FutureBuilder(
+                          future: ApiGetPersons.getimagesperson(
+                              personId: widget.personId),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            } else if (snapshot.hasError) {
+                              return Center(
+                                  child: Text('Error: ${snapshot.error}'));
+                            } else if (!snapshot.hasData) {
+                              return const Center(
+                                  child: Text('No images available.'));
+                            } else {
+                              var imagespersonmodel = snapshot.data!;
+                              return ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: imagespersonmodel.profiles?.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => FullImageScreen(
+                                            imageUrl:
+                                                'https://image.tmdb.org/t/p/w500${imagespersonmodel.profiles?[index].filePath ?? 'https://image.tmdb.org/t/p/w500${infoPersonModel.profilePath}'}',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 8.0),
+                                      child: Image.network(
+                                        'https://image.tmdb.org/t/p/w500${imagespersonmodel.profiles?[index].filePath ?? 'https://image.tmdb.org/t/p/w500${infoPersonModel.profilePath}'}',
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: Image.network(
-                                  'https://image.tmdb.org/t/p/w500${imagespersonmodel.profiles?[index].filePath ?? 'https://image.tmdb.org/t/p/w500${infoPersonModel.profilePath}'}',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            );
+                                  );
+                                },
+                              );
+                            }
                           },
-                        );
-                      }
-                    },
-                  ),
-                ),
-              ]),
+                        ),
+                      ),
+                    ]),
+              ),
             );
           }),
     );
