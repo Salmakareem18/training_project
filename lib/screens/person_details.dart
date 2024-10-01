@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:training_project/cubits/get_person_cubit/cubit_one.dart';
+import 'package:training_project/models/images_person_model.dart';
 import 'package:training_project/screens/full_image.dart';
 import 'package:training_project/servieces/api_get_persons.dart';
 
@@ -87,7 +88,7 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                       ),
                       SizedBox(
                         height: 200,
-                        child: FutureBuilder(
+                        child: FutureBuilder<ImagesPersonModel>(
                           future: ApiGetPersons.getimagesperson(
                               personId: widget.personId),
                           builder: (context, snapshot) {
@@ -98,15 +99,20 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                             } else if (snapshot.hasError) {
                               return Center(
                                   child: Text('Error: ${snapshot.error}'));
-                            } else if (!snapshot.hasData) {
+                            } else if (!snapshot.hasData ||
+                                snapshot.data?.profiles == null ||
+                                snapshot.data?.profiles?.isEmpty == true) {
                               return const Center(
                                   child: Text('No images available.'));
                             } else {
                               var imagesPersonModel = snapshot.data!;
+
                               return ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: imagesPersonModel.profiles?.length,
                                 itemBuilder: (context, index) {
+                                  var profile =
+                                      imagesPersonModel.profiles![index];
                                   return GestureDetector(
                                     onTap: () {
                                       Navigator.push(
@@ -114,7 +120,7 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                                         MaterialPageRoute(
                                           builder: (context) => FullImageScreen(
                                             imageUrl:
-                                                'https://image.tmdb.org/t/p/w500${imagesPersonModel.profiles![index].filePath!}',
+                                                'https://image.tmdb.org/t/p/w500${profile.filePath}',
                                           ),
                                         ),
                                       );
@@ -123,7 +129,7 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                                       padding:
                                           const EdgeInsets.only(right: 8.0),
                                       child: Image.network(
-                                        'https://image.tmdb.org/t/p/w500${imagesPersonModel.profiles?[index].filePath ?? 'https://image.tmdb.org/t/p/w500${infoPersonModel.profilePath}'}',
+                                        'https://image.tmdb.org/t/p/w500${profile.filePath}',
                                         fit: BoxFit.cover,
                                       ),
                                     ),

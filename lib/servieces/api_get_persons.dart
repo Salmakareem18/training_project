@@ -38,7 +38,7 @@ class ApiGetPersons {
   static Future<ImagesPersonModel> getimagesperson(
       {required int personId}) async {
     http.Response response = await http.get(Uri.parse(
-        'https://api.themoviedb.org/3/person/$personId?api_key=2dfe23358236069710a379edd4c65a6b'));
+        'https://api.themoviedb.org/3/person/$personId/images?api_key=2dfe23358236069710a379edd4c65a6b'));
 
     if (response.statusCode == 200) {
       Map<String, dynamic> decoded = json.decode(response.body);
