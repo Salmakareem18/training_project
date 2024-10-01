@@ -111,8 +111,6 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                                 scrollDirection: Axis.horizontal,
                                 itemCount: imagesPersonModel.profiles?.length,
                                 itemBuilder: (context, index) {
-                                  var profile =
-                                      imagesPersonModel.profiles![index];
                                   return GestureDetector(
                                     onTap: () {
                                       Navigator.push(
@@ -120,7 +118,7 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                                         MaterialPageRoute(
                                           builder: (context) => FullImageScreen(
                                             imageUrl:
-                                                'https://image.tmdb.org/t/p/w500${profile.filePath}',
+                                                'https://image.tmdb.org/t/p/w500${imagesPersonModel.profiles![index].filePath!}',
                                           ),
                                         ),
                                       );
@@ -129,7 +127,7 @@ class _PersonDetailScreenState extends State<PersonDetailScreen> {
                                       padding:
                                           const EdgeInsets.only(right: 8.0),
                                       child: Image.network(
-                                        'https://image.tmdb.org/t/p/w500${profile.filePath}',
+                                        'https://image.tmdb.org/t/p/w500${imagesPersonModel.profiles![index].filePath!}',
                                         fit: BoxFit.cover,
                                       ),
                                     ),
